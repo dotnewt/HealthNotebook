@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //add auth db context
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration["ConnectionStrings:DefaultConnection"]));   
+    options.UseNpgsql(builder.Configuration["ConnectionStrings:DefaultConnection"]));
 
 // Add services to the container.
 
@@ -28,5 +28,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 app.Run();
